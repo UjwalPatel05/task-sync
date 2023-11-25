@@ -8,6 +8,9 @@ import { FormSubmit } from "./form-submit";
 import { useAction } from "@/hooks/use-action";
 import { createBoard } from "@/actions/create-board";
 import { toast } from "sonner";
+import { FormPicker } from "./form-picker";
+import { ElementRef, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 interface FormPopoverProps {
   children: React.ReactNode;
@@ -22,11 +25,13 @@ export const FormPopover = ({
   sideOffset = 0,
   align,
 }: FormPopoverProps) => {
-
+  const router = useRouter();
+    const closeRef = useRef<ElementRef<"button">>(null);
     const {execute, fieldErrors} = useAction(createBoard, {
         onSuccess: (data) => {
-            console.log({data})
             toast.success('Board created successfully');
+            closeRef.current?.click();
+            router.push(`/board/${data.id}`);
         },
         onError: (error) => {
             console.log({error})
@@ -36,7 +41,11 @@ export const FormPopover = ({
 
     const onSubmit = (formData: FormData) => {
         const title = formData.get('title') as string;
-        execute({title});
+        const image = formData.get('image') as string;
+
+
+        
+        execute({title, image});
     }
 
   return (
@@ -52,7 +61,7 @@ export const FormPopover = ({
         <div className="text-sm font-medium text-center text-neutral-600 pb-4">
             Create Board
         </div>
-        <PopoverClose asChild>
+        <PopoverClose asChild ref={closeRef}>
             <Button className="h-auto w-auto absolute p-2 top-2 right-2 text-neutral-600" variant="ghost">
                 <XIcon className="h-4 w-4"/>
             </Button>
@@ -60,6 +69,7 @@ export const FormPopover = ({
 
         <form className="space-y-4" action={onSubmit}>
             <div className="space-y-4">
+                <FormPicker  id="image" errors={fieldErrors}/>
                 <FormInput id="title" type="text" label="Board Title" errors={fieldErrors}/>
             </div>
             <FormSubmit className="w-full">Create</FormSubmit>
