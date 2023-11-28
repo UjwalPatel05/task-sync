@@ -35,6 +35,7 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
           setImages(newImages);
         } else {
           console.log({ result });
+          setImages(defaultImages);
         }
       } catch (error) {
         console.log({ error });
