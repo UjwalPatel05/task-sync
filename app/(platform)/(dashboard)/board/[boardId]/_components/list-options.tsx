@@ -94,7 +94,7 @@ const ListOptions = ({
                 </FormSubmit>
             </form>
 
-            <Separator className='my-1'/>
+            <Separator className='my-1 w-[96%] mx-auto'/>
 
             <form action={onDelete}>
                 <input hidden name='id' id='id' value={data.id}/>
