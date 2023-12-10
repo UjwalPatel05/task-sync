@@ -49,15 +49,6 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
     }));
   };
 
-     // For some reason, this is needed to prevent a hydration mismatch error
-     const [isMounted, setIsMounted] = useState(false);
-
-     useEffect(()=>{
-         setIsMounted(true);
-     },[])
-  
-     if(!isMounted) return null;
-
   
   if (!isLoadedOrg || !isLoadedOrgList || userMemberships.isLoading) {
     return (
