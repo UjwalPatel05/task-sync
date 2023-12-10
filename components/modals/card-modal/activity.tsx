@@ -9,7 +9,7 @@ interface ActivityProps {
     items: AuditLog[];
 }
 
-const Activity = ({
+export const Activity = ({
     items
 }:ActivityProps) =>{
     return (
@@ -29,8 +29,6 @@ const Activity = ({
     )
 }
 
-Activity.displayName = "Activity";
-
 Activity.Skeleton = () => {
     return (
         <div className="flex flex-start gap-x-3 w-full">
@@ -43,4 +41,4 @@ Activity.Skeleton = () => {
     )
 }
 
-export default Activity;
+Activity.displayName = "Activity";
