@@ -49,6 +49,9 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
     }));
   };
 
+  console.log("In the sidebar");
+  
+
   
   if (!isLoadedOrg || !isLoadedOrgList || userMemberships.isLoading) {
     return (

@@ -13,6 +13,9 @@ export const Info = ({
     isPro
 }:InfoProps) => {
 
+    console.log("In the info component");
+    
+
 
 
     const {organization, isLoaded} = useOrganization();
@@ -20,7 +23,7 @@ export const Info = ({
     if(!isLoaded) {
         return(
             <div>
-                <Info.Skeleton/>
+                .Skeleton/>
             </div>
         )
     }

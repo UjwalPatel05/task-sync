@@ -7,6 +7,9 @@ import { checkSubscription } from "@/lib/subscription";
 const OrganizationIdPage = async () => {
   const isPro = await checkSubscription();
 
+  console.log("In the organization id page");
+  
+
   return (<div className="w-full mb-20">
       <Info isPro={isPro}/>
       <Separator className="my-4"/>

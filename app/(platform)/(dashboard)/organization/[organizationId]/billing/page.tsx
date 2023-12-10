@@ -7,6 +7,7 @@ import SubscriptionButton from "./_components/subscription-button";
 const BillingPage = async() => {
 
     const isPro = await checkSubscription();
+    console.log("In the billing page");
 
     return (
         <div className="w-full">

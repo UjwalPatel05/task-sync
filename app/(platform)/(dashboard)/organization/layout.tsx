@@ -3,6 +3,9 @@ import { Sidebar } from "../_components/sidebar"
 const OrganizationLayout = ({ children }:{
     children: React.ReactNode
 }) => {
+    
+    console.log("In the organization layout");
+    
     return(
         <main className="pt-20 md:pt-24 px-4 max-w-6xl 2xl:max-w-screen-xl mx-auto" suppressHydrationWarning={true}>
             <div className="flex gap-x-7">
