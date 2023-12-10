@@ -16,14 +16,12 @@ export const Info = ({
     console.log("In the info component");
     
 
-
-
     const {organization, isLoaded} = useOrganization();
 
     if(!isLoaded) {
         return(
             <div>
-                .Skeleton/>
+                <Info.Skeleton/>
             </div>
         )
     }
