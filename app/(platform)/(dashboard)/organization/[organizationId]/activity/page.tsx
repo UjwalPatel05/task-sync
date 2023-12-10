@@ -10,7 +10,9 @@ const ActivityPage = async() => {
     
     return (
         <div className="w-full">
-            <Info isPro={isPro}/>
+            <Suspense fallback={<Info.Skeleton/>}>
+      <Info isPro={isPro}/>
+      </Suspense>
             <Separator className="my-2"/>
             <Suspense fallback={<ActivityList.Skeleton/>}>
             <ActivityList/>
