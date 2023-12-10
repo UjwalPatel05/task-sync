@@ -86,3 +86,5 @@ Actions.Skeleton = () => {
     </div>
   );
 };
+
+Actions.displayName = "Actions";
