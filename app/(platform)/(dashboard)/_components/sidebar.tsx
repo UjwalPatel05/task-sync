@@ -8,12 +8,16 @@ import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import { useLocalStorage } from "usehooks-ts";
 import { NavItem, Organization } from "./nav-item";
+import { useEffect, useState } from "react";
 
 interface SidebarProps {
   storageKey?: string;
 }
 
 export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
+
+  
+
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(
     storageKey,
     {}
@@ -44,6 +48,15 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
       [id]: !expanded[id],
     }));
   };
+
+     // For some reason, this is needed to prevent a hydration mismatch error
+     const [isMounted, setIsMounted] = useState(false);
+
+     useEffect(()=>{
+         setIsMounted(true);
+     },[])
+  
+     if(!isMounted) return null;
 
   
   if (!isLoadedOrg || !isLoadedOrgList || userMemberships.isLoading) {

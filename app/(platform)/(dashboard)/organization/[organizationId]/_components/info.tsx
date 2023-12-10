@@ -4,6 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useOrganization } from "@clerk/nextjs";
 import { CreditCardIcon } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 interface InfoProps{
     isPro: boolean;
 }
@@ -12,7 +13,18 @@ export const Info = ({
     isPro
 }:InfoProps) => {
 
+
+
     const {organization, isLoaded} = useOrganization();
+
+         // For some reason, this is needed to prevent a hydration mismatch error
+         const [isMounted, setIsMounted] = useState(false);
+
+         useEffect(()=>{
+             setIsMounted(true);
+         },[])
+     
+         if(!isMounted) return null;
 
     if(!isLoaded) {
         return(
