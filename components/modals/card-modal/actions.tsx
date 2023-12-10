@@ -15,7 +15,7 @@ interface ActionsProps {
   data: CardWithList;
 }
 
-export const Actions = ({ data }: ActionsProps) => {
+export function Actions({ data }: ActionsProps){
   const params = useParams();
   const cardModal = useCardModal();
 

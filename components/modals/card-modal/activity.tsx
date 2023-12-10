@@ -9,9 +9,9 @@ interface ActivityProps {
     items: AuditLog[];
 }
 
-export const Activity = ({
+export function Activity({
     items
-}:ActivityProps) =>{
+}:ActivityProps) {
     return (
         <div className="flex items-start gap-x-3 w-full">
             <ActivityIcon className="h-5 w-5 mt-0.5 text-neutral-700"/>
