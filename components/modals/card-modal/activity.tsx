@@ -9,7 +9,7 @@ interface ActivityProps {
     items: AuditLog[];
 }
 
-export const Activity = ({
+const Activity = ({
     items
 }:ActivityProps) =>{
     return (
@@ -42,3 +42,5 @@ Activity.Skeleton = () => {
         </div>
     )
 }
+
+export default Activity;

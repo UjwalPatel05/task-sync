@@ -15,7 +15,7 @@ interface ActionsProps {
   data: CardWithList;
 }
 
-export const Actions = ({ data }: ActionsProps) => {
+const Actions = ({ data }: ActionsProps) => {
   const params = useParams();
   const cardModal = useCardModal();
 
@@ -88,4 +88,6 @@ Actions.Skeleton = () => {
     </div>
   );
 };
+
+export default Actions;
 
