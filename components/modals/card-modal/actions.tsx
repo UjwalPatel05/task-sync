@@ -77,6 +77,8 @@ export const Actions = ({ data }: ActionsProps) => {
   );
 };
 
+Actions.displayName = "Actions";
+
 Actions.Skeleton = () => {
   return (
     <div className="space-y-2 mt-2">
@@ -87,4 +89,3 @@ Actions.Skeleton = () => {
   );
 };
 
-Actions.displayName = "Actions";

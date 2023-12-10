@@ -29,6 +29,8 @@ export const Activity = ({
     )
 }
 
+Activity.displayName = "Activity";
+
 Activity.Skeleton = () => {
     return (
         <div className="flex flex-start gap-x-3 w-full">
@@ -40,5 +42,3 @@ Activity.Skeleton = () => {
         </div>
     )
 }
-
-Activity.displayName = "Activity";
