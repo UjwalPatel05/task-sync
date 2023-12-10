@@ -9,8 +9,9 @@ import React from 'react'
 import { Header } from './header';
 import { Description } from './description';
 import { AuditLog } from '@prisma/client';
-import Activity from './activity';
-import Actions from './actions';
+import { Activity } from './activity';
+import { Actions } from './actions';
+
 
 const CardModal = () => {
 
