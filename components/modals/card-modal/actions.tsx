@@ -15,6 +15,7 @@ interface ActionsProps {
   data: CardWithList;
 }
 
+// eslint-disable-next-line react/display-name
 const Actions = ({ data }: ActionsProps) => {
   const params = useParams();
   const cardModal = useCardModal();

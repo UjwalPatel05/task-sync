@@ -9,6 +9,7 @@ interface ActivityProps {
     items: AuditLog[];
 }
 
+// eslint-disable-next-line react/display-name
 const Activity = ({
     items
 }:ActivityProps) =>{
