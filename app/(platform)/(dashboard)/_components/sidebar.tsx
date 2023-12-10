@@ -49,7 +49,6 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
     }));
   };
 
-  console.log("In the sidebar");
   
 
   

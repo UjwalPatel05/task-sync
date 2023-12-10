@@ -12,8 +12,6 @@ interface InfoProps{
 export const Info = ({
     isPro
 }:InfoProps) => {
-
-    console.log("In the info component");
     
 
     const {organization, isLoaded} = useOrganization();

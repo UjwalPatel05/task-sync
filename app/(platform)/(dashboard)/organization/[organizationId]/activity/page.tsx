@@ -6,13 +6,10 @@ import { checkSubscription } from "@/lib/subscription";
 
 const ActivityPage = async() => {
     const isPro = await checkSubscription();
-    console.log("In the activity page");
-    
+
     return (
         <div className="w-full">
-            <Suspense fallback={<Info.Skeleton/>}>
-      <Info isPro={isPro}/>
-      </Suspense>
+            <Info isPro={isPro}/>
             <Separator className="my-2"/>
             <Suspense fallback={<ActivityList.Skeleton/>}>
             <ActivityList/>
