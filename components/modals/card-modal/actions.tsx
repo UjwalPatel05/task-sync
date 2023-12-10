@@ -15,7 +15,7 @@ interface ActionsProps {
   data: CardWithList;
 }
 
-export function Actions({ data }: ActionsProps){
+const Actions = ({ data }: ActionsProps) => {
   const params = useParams();
   const cardModal = useCardModal();
 
@@ -77,6 +77,8 @@ export function Actions({ data }: ActionsProps){
   );
 };
 
+
+
 Actions.Skeleton = () => {
   return (
     <div className="space-y-2 mt-2">
@@ -88,3 +90,5 @@ Actions.Skeleton = () => {
 };
 
 Actions.displayName = "Actions";
+
+export default Actions;

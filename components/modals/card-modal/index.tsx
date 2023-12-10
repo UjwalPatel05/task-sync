@@ -8,9 +8,9 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react'
 import { Header } from './header';
 import { Description } from './description';
-import { Actions } from './actions';
 import { AuditLog } from '@prisma/client';
-import { Activity } from './activity';
+import Activity from './activity';
+import Actions from './actions';
 
 const CardModal = () => {
 
