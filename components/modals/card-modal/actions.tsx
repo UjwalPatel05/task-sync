@@ -89,6 +89,4 @@ Actions.Skeleton = () => {
   );
 };
 
-Actions.displayName = "Actions";
-
 export default Actions;

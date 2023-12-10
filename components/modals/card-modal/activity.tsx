@@ -41,7 +41,5 @@ Activity.Skeleton = () => {
     )
 }
 
-Activity.displayName = "Activity";
-
 export default Activity;
 
