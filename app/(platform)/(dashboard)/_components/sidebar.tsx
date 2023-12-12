@@ -52,8 +52,10 @@ export const Sidebar = ({
   if (!isMounted) {
     return null;
   }
-  
 
+  if (typeof window === 'undefined' || !isMounted) {
+    return null;
+  }
 
   console.log('Server Data:', activeOrganization, isLoadedOrg, userMemberships, isLoadedOrgList);
   
@@ -74,7 +76,7 @@ export const Sidebar = ({
     }));
   };
 
-  if (!isLoadedOrg || !isLoadedOrgList || userMemberships.isLoading) {
+  if (!isMounted|| !isLoadedOrg || !isLoadedOrgList || userMemberships.isLoading) {
     console.log("sidebar loading");
     return (
       <>
