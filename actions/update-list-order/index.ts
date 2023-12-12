@@ -1,50 +1,51 @@
 "use server";
 
-import { auth } from "@clerk/nextjs";
-import { revalidatePath } from "next/cache";
-
 import { db } from "@/lib/db";
-import { createSafeAction } from "@/lib/create-safe-action";
-
-import { UpdateListOrder } from "./schema";
 import { InputType, ReturnType } from "./types";
+import {auth} from "@clerk/nextjs"
+import { revalidatePath } from "next/cache";
+import { createSafeAction } from "@/lib/create-safe-action";
+import { UpdateListOrder } from "./schema";
 
-const handler = async (data: InputType): Promise<ReturnType> => {
-  const { userId, orgId } = auth();
+const handler = async (data: InputType) : Promise<ReturnType> => {
+    const { userId, orgId } = auth();
 
-  if (!userId || !orgId) {
-    return {
-      error: "Unauthorized",
-    };
-  }
-
-  const { items, boardId } = data;
-  let lists;
-
-  try {
-    const transaction = items.map((list) => 
-      db.list.update({
-        where: {
-          id: list.id,
-          board: {
-            orgId,
-          },
-        },
-        data: {
-          order: list.order,
-        },
-      })
-    );
-
-    lists = await db.$transaction(transaction);
-  } catch (error) {
-    return {
-      error: "Failed to reorder."
+    if (!userId || !orgId) {
+        return {
+            error: "You must be logged in to update title."
+        }
     }
-  }
 
-  revalidatePath(`/board/${boardId}`);
-  return { data: lists };
+    const { items, boardId } = data;
+
+    let lists;
+
+    try {
+        const transaction = items.map((list)=> db.list.update({
+            where: {
+                id: list.id,
+                board:{
+                    orgId
+                },
+            },
+            data: {
+                order: list.order,
+            },
+        }));
+
+        lists = await db.$transaction(transaction); 
+    } catch (error) {
+        console.log(error);
+        return {
+            error: "Failed to reorder."
+        }
+    }
+
+    revalidatePath(`/board/${boardId}`);   
+    return {
+        data: lists
+    }
+
 };
 
 export const updateListOrder = createSafeAction(UpdateListOrder, handler);

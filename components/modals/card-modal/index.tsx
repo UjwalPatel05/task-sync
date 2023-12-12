@@ -1,62 +1,70 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { useCardModal } from '@/hooks/use-card-modal';
+import { fetcher } from '@/lib/fetcher';
+import { CardWithList } from '@/types';
+import { useQuery } from '@tanstack/react-query';
+import React from 'react'
+import { Header } from './header';
+import { Description } from './description';
+import { AuditLog } from '@prisma/client';
+import { Activity } from './activity';
+import { Actions } from './actions';
 
-import { CardWithList } from "@/types";
-import { fetcher } from "@/lib/fetcher";
-import { AuditLog } from "@prisma/client";
-import { useCardModal } from "@/hooks/use-card-modal";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 
-import { Header } from "./header";
-import { Description } from "./description";
-import { Actions } from "./actions";
-import { Activity } from "./activity";
+const CardModal = () => {
 
-export const CardModal = () => {
-  const id = useCardModal((state) => state.id);
-  const isOpen = useCardModal((state) => state.isOpen);
-  const onClose = useCardModal((state) => state.onClose);
+    const id = useCardModal((state) => state.id);
+    const isOpen = useCardModal((state) => state.isOpen);
+    const onClose = useCardModal((state) => state.onClose);
 
-  const { data: cardData } = useQuery<CardWithList>({
-    queryKey: ["card", id],
-    queryFn: () => fetcher(`/api/cards/${id}`),
-  });
+    const {data: cardData} = useQuery<CardWithList>({
+      queryKey: ['card', id],
+      queryFn: () => fetcher(`/api/cards/${id}`)
+    });
 
-  const { data: auditLogsData } = useQuery<AuditLog[]>({
-    queryKey: ["card-logs", id],
-    queryFn: () => fetcher(`/api/cards/${id}/logs`),
-  });
+    const {data: auditLogs} = useQuery<AuditLog[]>({
+      queryKey: ['card-logs', id],
+      queryFn: () => fetcher(`/api/cards/${id}/logs`)
+    });
 
   return (
     <Dialog
-      open={isOpen}
-      onOpenChange={onClose}
+    open={isOpen}
+    onOpenChange={onClose}
     >
-      <DialogContent>
-        {!cardData
-          ? <Header.Skeleton />
-          : <Header data={cardData} />
-        }
-        <div className="grid grid-cols-1 md:grid-cols-4 md:gap-4">
-          <div className="col-span-3">
-            <div className="w-full space-y-6">
-              {!cardData
-                ? <Description.Skeleton />
-                : <Description data={cardData} />
-              }
-              {!auditLogsData
-                ? <Activity.Skeleton />
-                : <Activity items={auditLogsData} />
-              }
+        <DialogContent>
+            {cardData ? (
+              <Header data ={cardData} />
+            ):(
+              <Header.Skeleton />
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-4 md:gap-4">
+                <div className='col-span-3'>
+                    <div className="w-full space-y-6">
+                        {
+                          !cardData ? (
+                            <Description.Skeleton />
+                          ):(<Description data={cardData} />)
+                        }
+                        {
+                          !auditLogs ? (
+                            <Activity.Skeleton />
+                          ):(<Activity items={auditLogs} />)
+                        }
+                    </div>
+                </div>
+                {!cardData ? (
+                  <Actions.Skeleton />
+                ):(
+                  <Actions data={cardData} />
+                )}
             </div>
-          </div>
-          {!cardData
-            ? <Actions.Skeleton />
-            : <Actions data={cardData} />
-          }
-        </div>
-      </DialogContent>
+        </DialogContent>
     </Dialog>
-  );
-};
+  )
+}
+
+export default CardModal
