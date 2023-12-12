@@ -15,9 +15,20 @@ interface SidebarProps {
   storageKey?: string;
 };
 
+const mockData = {
+  organization: {
+    imageUrl: "your_image_url",
+    name: "Your Organization",
+  },
+  isLoaded: true,
+};
+
+
 export const Sidebar = ({
   storageKey = "t-sidebar-state",
 }: SidebarProps) => {
+
+
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(
     storageKey,
     {}
@@ -26,7 +37,7 @@ export const Sidebar = ({
   const {
     organization: activeOrganization,
     isLoaded: isLoadedOrg
-  } = useOrganization();
+  } = useOrganization() || mockData ;
   const { 
     userMemberships,
     isLoaded: isLoadedOrgList
