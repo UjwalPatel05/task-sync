@@ -1,14 +1,16 @@
-import { Navbar } from "./_components/Navbar";
+import { Navbar } from "./_components/navbar";
 
-const DashboardLayout = ({ children }:{
-    children: React.ReactNode
-}) => {
-    return(
-        <div className="h-full" suppressHydrationWarning={true}>
-            <Navbar/>
-            {children}
-        </div>
-    )
-};
+const DashboardLayout = ({ 
+  children
+}: { 
+  children: React.ReactNode;
+ }) => {
+  return (
+    <div className="h-full">
+      <Navbar />
+      {children}
+    </div>
+  );
+ };
 
-export default DashboardLayout
+ export default DashboardLayout;

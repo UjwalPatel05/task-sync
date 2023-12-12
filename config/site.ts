@@ -1,4 +1,4 @@
 export const siteConfig = {
-    name: "TaskSync",
-    description: "TaskSync is a simple task management app",
-}
+  name: "Taskify",
+  description: "Collaborate, manage projects, and reach new productivity peaks",
+};

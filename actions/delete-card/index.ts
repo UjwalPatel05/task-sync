@@ -1,11 +1,13 @@
 "use server";
 
-import { db } from "@/lib/db";
-import { InputType, ReturnType } from "./types";
 import { auth } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
+
+import { db } from "@/lib/db";
 import { createSafeAction } from "@/lib/create-safe-action";
+
 import { DeleteCard } from "./schema";
+import { InputType, ReturnType } from "./types";
 import { createAuditLog } from "@/lib/create-audit-log";
 import { ACTION, ENTITY_TYPE } from "@prisma/client";
 
@@ -14,45 +16,39 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   if (!userId || !orgId) {
     return {
-      error: "You must be logged in to copy a list.",
+      error: "Unauthorized",
     };
   }
 
   const { id, boardId } = data;
-
   let card;
 
   try {
-    
     card = await db.card.delete({
       where: {
         id,
-        list:{
+        list: {
           board: {
             orgId,
           },
-        }
+        },
       },
     });
 
     await createAuditLog({
-      entityId: card.id,
       entityTitle: card.title,
+      entityId: card.id,
       entityType: ENTITY_TYPE.CARD,
       action: ACTION.DELETE,
     })
-
   } catch (error) {
-    console.log(error);
     return {
-      error: "Failed to delete the card.",
-    };
+      error: "Failed to delete."
+    }
   }
 
   revalidatePath(`/board/${boardId}`);
-  return {
-    data: card,
-  };
+  return { data: card };
 };
 
 export const deleteCard = createSafeAction(DeleteCard, handler);
