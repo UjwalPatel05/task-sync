@@ -3,29 +3,18 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { useOrganization } from "@clerk/nextjs";
 import { CreditCardIcon } from "lucide-react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 interface InfoProps{
     isPro: boolean;
 }
 
-export const Info = ({
+const Info = ({
     isPro
 }:InfoProps) => {
     
-    const [isClient, setIsClient] = useState(false)
- 
-    useEffect(() => {
-      setIsClient(true)
-    }, [])
-
     const {organization, isLoaded} = useOrganization();
     
-    if (!isClient) {
-      return null
-    }
-
-   
 
     if(!isLoaded) {
         return(
@@ -72,3 +61,5 @@ Info.Skeleton = function SkeletonInfo(){
         </div>
     )
 }
+export default dynamic (() => Promise.resolve(Info), {ssr: false})
+

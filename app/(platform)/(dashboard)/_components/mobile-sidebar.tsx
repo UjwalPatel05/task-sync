@@ -6,7 +6,7 @@ import { useMobileSidebar } from "@/hooks/use-mobile-sidebar";
 import { MenuIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Sidebar } from "./sidebar";
+import Sidebar from "./sidebar";
 
 export const MobileSidebar = () => {
 

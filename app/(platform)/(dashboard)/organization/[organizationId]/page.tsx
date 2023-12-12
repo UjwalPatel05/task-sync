@@ -1,8 +1,8 @@
 import { Separator } from "@/components/ui/separator";
-import { Info } from "./_components/info";
 import { BoardList } from "./_components/board-list";
 import { Suspense } from "react";
 import { checkSubscription } from "@/lib/subscription";
+import Info from "./_components/info";
 
 const OrganizationIdPage = async () => {
   const isPro = await checkSubscription();

@@ -8,19 +8,13 @@ import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import { useLocalStorage } from "usehooks-ts";
 import { NavItem, Organization } from "./nav-item";
-import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
 interface SidebarProps {
   storageKey?: string;
 }
 
-export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
-
-  const [isClient, setIsClient] = useState(false)
- 
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
 
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(
     storageKey,
@@ -35,10 +29,6 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
       infinite: true,
     },
   });
-  
-  if (!isClient) {
-    return null
-  }
   
   const defaultAccordionValue: string[] = Object.keys(expanded).reduce(
     (acc: string[], key: string) => {
@@ -105,3 +95,6 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
     </>
   );
 };
+
+export default dynamic (() => Promise.resolve(Sidebar), {ssr: false})
+
