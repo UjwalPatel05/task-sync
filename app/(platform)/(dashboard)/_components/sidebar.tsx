@@ -16,7 +16,15 @@ interface SidebarProps {
 
 export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
 
+  const [isClient, setIsClient] = useState(false)
+ 
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
   
+  if (!isClient) {
+    return null
+  }
 
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(
     storageKey,

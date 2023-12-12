@@ -13,6 +13,15 @@ export const Info = ({
     isPro
 }:InfoProps) => {
     
+    const [isClient, setIsClient] = useState(false)
+ 
+    useEffect(() => {
+      setIsClient(true)
+    }, [])
+    
+    if (!isClient) {
+      return null
+    }
 
     const {organization, isLoaded} = useOrganization();
 
