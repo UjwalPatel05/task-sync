@@ -21,10 +21,6 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
   useEffect(() => {
     setIsClient(true)
   }, [])
-  
-  if (!isClient) {
-    return null
-  }
 
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(
     storageKey,
@@ -39,6 +35,10 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
       infinite: true,
     },
   });
+  
+  if (!isClient) {
+    return null
+  }
   
   const defaultAccordionValue: string[] = Object.keys(expanded).reduce(
     (acc: string[], key: string) => {

@@ -18,12 +18,14 @@ export const Info = ({
     useEffect(() => {
       setIsClient(true)
     }, [])
+
+    const {organization, isLoaded} = useOrganization();
     
     if (!isClient) {
       return null
     }
 
-    const {organization, isLoaded} = useOrganization();
+   
 
     if(!isLoaded) {
         return(
