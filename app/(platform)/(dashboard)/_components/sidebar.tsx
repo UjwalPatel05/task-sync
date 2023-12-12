@@ -8,7 +8,6 @@ import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import { useLocalStorage } from "usehooks-ts";
 import { NavItem, Organization } from "./nav-item";
-import dynamic from "next/dynamic";
 
 interface SidebarProps {
   storageKey?: string;
@@ -96,5 +95,4 @@ const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
   );
 };
 
-export default dynamic (() => Promise.resolve(Sidebar), {ssr: false})
-
+export default Sidebar;

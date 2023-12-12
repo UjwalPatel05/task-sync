@@ -3,7 +3,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { useOrganization } from "@clerk/nextjs";
 import { CreditCardIcon } from "lucide-react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 interface InfoProps{
     isPro: boolean;
@@ -61,5 +60,5 @@ Info.Skeleton = function SkeletonInfo(){
         </div>
     )
 }
-export default dynamic (() => Promise.resolve(Info), {ssr: false})
 
+export default Info;
