@@ -13,10 +13,10 @@ const OrganizationIdLayout = ({ children }:{
     children: React.ReactNode
 }) => {
     return(
-        <div suppressHydrationWarning={true}>
+        <>
         <OrgControl/>
         {children}
-        </div>
+        </>
     )
 }
 
