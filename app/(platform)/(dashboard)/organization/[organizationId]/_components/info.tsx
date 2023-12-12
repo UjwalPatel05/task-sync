@@ -13,7 +13,10 @@ interface InfoProps {
 export const Info = ({
   isPro,
 }: InfoProps) => {
+  
   const { organization, isLoaded } = useOrganization();
+
+  console.log('Server Data:', organization, isLoaded);
 
   if (!isLoaded) {
     console.log("info loading");

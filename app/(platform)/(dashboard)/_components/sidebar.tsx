@@ -36,6 +36,9 @@ export const Sidebar = ({
     },
   });
 
+  console.log('Server Data:', activeOrganization, isLoadedOrg, userMemberships, isLoadedOrgList);
+  
+
   const defaultAccordionValue: string[] = Object.keys(expanded)
     .reduce((acc: string[], key: string) => {
       if (expanded[key]) {
