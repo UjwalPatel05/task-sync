@@ -38,10 +38,6 @@ export const Sidebar = ({
     isLoaded: isLoadedOrg
   } = useOrganization() ;
 
-  if (!isMounted) {
-    return null;
-  }
-  
   const { 
     userMemberships,
     isLoaded: isLoadedOrgList
@@ -50,6 +46,12 @@ export const Sidebar = ({
       infinite: true,
     },
   });
+
+  if (!isMounted) {
+    return null;
+  }
+  
+
 
   console.log('Server Data:', activeOrganization, isLoadedOrg, userMemberships, isLoadedOrgList);
   
