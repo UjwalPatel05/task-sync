@@ -10,19 +10,11 @@ interface InfoProps {
   isPro: boolean;
 };
 
-const mockData = {
-  organization: {
-    imageUrl: "your_image_url",
-    name: "Your Organization",
-  },
-  isLoaded: true,
-};
-
 export const Info = ({
   isPro,
 }: InfoProps) => {
-
-  const { organization, isLoaded } = useOrganization() || mockData ;
+  
+  const { organization, isLoaded } = useOrganization();
 
   console.log('Server Data:', organization, isLoaded);
 

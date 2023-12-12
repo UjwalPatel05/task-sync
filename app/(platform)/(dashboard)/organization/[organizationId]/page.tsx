@@ -6,9 +6,8 @@ import { Info } from "./_components/info";
 
 
 const OrganizationIdPage = async () => {
+
   const isPro = await checkSubscription();
-
-
 
   return (<div className="w-full mb-20">
       <Info isPro={isPro}/>

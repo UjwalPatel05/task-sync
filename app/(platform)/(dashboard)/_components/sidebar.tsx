@@ -10,23 +10,22 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Accordion } from "@/components/ui/accordion";
 
 import { NavItem, Organization } from "./nav-item";
+import { useEffect, useState } from "react";
 
 interface SidebarProps {
   storageKey?: string;
 };
 
-const mockData = {
-  organization: {
-    imageUrl: "your_image_url",
-    name: "Your Organization",
-  },
-  isLoaded: true,
-};
-
-
 export const Sidebar = ({
   storageKey = "t-sidebar-state",
 }: SidebarProps) => {
+
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
 
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(
@@ -37,7 +36,12 @@ export const Sidebar = ({
   const {
     organization: activeOrganization,
     isLoaded: isLoadedOrg
-  } = useOrganization() || mockData ;
+  } = useOrganization() ;
+
+  if (!isMounted) {
+    return null;
+  }
+  
   const { 
     userMemberships,
     isLoaded: isLoadedOrgList
@@ -109,6 +113,7 @@ export const Sidebar = ({
         type="multiple"
         defaultValue={defaultAccordionValue}
         className="space-y-2"
+        suppressHydrationWarning={true}
       >
         {userMemberships.data.map(({ organization }) => (
           <NavItem
