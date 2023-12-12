@@ -24,6 +24,8 @@ export const Sidebar = ({
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    console.log("sidebar mounted in client");
+    
     setIsMounted(true);
   }, []);
 
