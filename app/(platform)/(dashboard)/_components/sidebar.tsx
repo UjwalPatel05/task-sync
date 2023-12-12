@@ -6,7 +6,6 @@ import { useLocalStorage } from "usehooks-ts";
 import { useOrganization, useOrganizationList } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Accordion } from "@/components/ui/accordion";
 
@@ -54,6 +53,7 @@ export const Sidebar = ({
   };
 
   if (!isLoadedOrg || !isLoadedOrgList || userMemberships.isLoading) {
+    console.log("sidebar loading");
     return (
       <>
         <div className="flex items-center justify-between mb-2">
@@ -68,6 +68,8 @@ export const Sidebar = ({
       </>
     );
   }
+
+  console.log("sidebar loaded");
 
   return (
     <>

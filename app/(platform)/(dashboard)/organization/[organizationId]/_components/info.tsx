@@ -16,10 +16,13 @@ export const Info = ({
   const { organization, isLoaded } = useOrganization();
 
   if (!isLoaded) {
+    console.log("info loading");
     return (
       <Info.Skeleton />
     );
   }
+
+  console.log("info loaded");
 
   return (
     <div className="flex items-center gap-x-4">
