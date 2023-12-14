@@ -5,6 +5,7 @@ import { CreditCard } from "lucide-react";
 import { useOrganization } from "@clerk/nextjs";
 
 import { Skeleton } from "@/components/ui/skeleton";
+import { useEffect, useState } from "react";
 
 interface InfoProps {
   isPro: boolean;
@@ -13,12 +14,28 @@ interface InfoProps {
 export const Info = ({
   isPro,
 }: InfoProps) => {
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    console.log("Info mounted in client");
+
+    setIsMounted(true);
+  }, []);
   
   const { organization, isLoaded } = useOrganization();
 
-  console.log('Server Data:', organization, isLoaded);
+  console.log("Info Server Data:", organization, isLoaded)
 
-  if (!isLoaded) {
+  if (!isMounted) {
+    return null;
+  }
+
+  if (typeof window === "undefined" || !isMounted) {
+    return null;
+  }
+
+  if (!isLoaded || !isMounted) {
     console.log("info loading");
     return (
       <Info.Skeleton />

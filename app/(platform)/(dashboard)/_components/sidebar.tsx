@@ -14,60 +14,53 @@ import { useEffect, useState } from "react";
 
 interface SidebarProps {
   storageKey?: string;
-};
+}
 
-export const Sidebar = ({
-  storageKey = "t-sidebar-state",
-}: SidebarProps) => {
-
-
+export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     console.log("sidebar mounted in client");
-    
+
     setIsMounted(true);
   }, []);
-
 
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(
     storageKey,
     {}
   );
 
-  const {
-    organization: activeOrganization,
-    isLoaded: isLoadedOrg
-  } = useOrganization() ;
+  const { organization: activeOrganization, isLoaded: isLoadedOrg } =
+    useOrganization();
 
-  const { 
-    userMemberships,
-    isLoaded: isLoadedOrgList
-  } = useOrganizationList({
+    console.log("Sidebar Server Data:", activeOrganization, isLoadedOrg)
+
+  const { userMemberships, isLoaded: isLoadedOrgList } = useOrganizationList({
     userMemberships: {
       infinite: true,
     },
   });
 
+  console.log("Sidebar Server Data:", userMemberships, isLoadedOrgList)
+
   if (!isMounted) {
     return null;
   }
 
-  if (typeof window === 'undefined' || !isMounted) {
+  if (typeof window === "undefined" || !isMounted) {
     return null;
   }
 
-  console.log('Server Data:', activeOrganization, isLoadedOrg, userMemberships, isLoadedOrgList);
-  
-
-  const defaultAccordionValue: string[] = Object.keys(expanded)
-    .reduce((acc: string[], key: string) => {
+  const defaultAccordionValue: string[] = Object.keys(expanded).reduce(
+    (acc: string[], key: string) => {
       if (expanded[key]) {
         acc.push(key);
       }
 
       return acc;
-  }, []);
+    },
+    []
+  );
 
   const onExpand = (id: string) => {
     setExpanded((curr) => ({
@@ -76,7 +69,14 @@ export const Sidebar = ({
     }));
   };
 
-  if (!isMounted|| !isLoadedOrg || !isLoadedOrgList || userMemberships.isLoading) {
+  console.log("Is Mounted:", isMounted, "Is Loaded Org:", isLoadedOrg, "Is Loaded Org List:", isLoadedOrgList, "User Memberships:", userMemberships.isLoading)
+
+  if (
+    !isMounted ||
+    !isLoadedOrg ||
+    !isLoadedOrgList ||
+    userMemberships.isLoading
+  ) {
     console.log("sidebar loading");
     return (
       <>
@@ -98,9 +98,7 @@ export const Sidebar = ({
   return (
     <>
       <div className="font-medium text-xs flex items-center mb-1">
-        <span className="pl-4">
-          Workspaces
-        </span>
+        <span className="pl-4">Workspaces</span>
         <Button
           asChild
           type="button"
@@ -109,9 +107,7 @@ export const Sidebar = ({
           className="ml-auto"
         >
           <Link href="/select-org">
-            <Plus
-              className="h-4 w-4"
-            />
+            <Plus className="h-4 w-4" />
           </Link>
         </Button>
       </div>
