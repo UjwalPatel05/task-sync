@@ -16,7 +16,6 @@ export const Info = ({
 }: InfoProps) => {
 
   const [isMounted, setIsMounted] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // Manually manage loading state
 
 
   useEffect(() => {
@@ -29,12 +28,7 @@ export const Info = ({
   );
 
 
-  useEffect(() => {
-    if (isLoaded) {
-      setIsLoading(false); // Update loading state when data is loaded
-    }
-  }, [isLoaded]);
-
+ 
 
   console.log("Info Server Data:", organization, isLoaded)
 
@@ -46,16 +40,11 @@ export const Info = ({
     return null;
   }
 
-  if (isLoading || !isMounted) {
+  if (!isLoaded || !isMounted) {
     console.log("info loading");
     return (
       <Info.Skeleton />
     );
-  }
-
-  if (!organization) {
-    // Handle case where organization is not available
-    return null;
   }
 
   console.log("info loaded");
