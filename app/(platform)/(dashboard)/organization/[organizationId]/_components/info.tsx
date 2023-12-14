@@ -15,37 +15,32 @@ export const Info = ({
   isPro,
 }: InfoProps) => {
 
+
   const [isMounted, setIsMounted] = useState(false);
-
-
-  useEffect(() => {
-    console.log("Info mounted in client");
-
-    setIsMounted(true);
-  }, []);
-  
   const { organization, isLoaded } = useOrganization(
   );
 
-
- 
-
-  console.log("Info Server Data:", organization, isLoaded)
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   if (!isMounted) {
-    return null;
+    return null; // Render nothing on the server side
   }
 
-  if (typeof window === "undefined" || !isMounted) {
-    return null;
-  }
+  console.log("******** Info *********");
 
-  if (!isLoaded || !isMounted) {
+  console.log("organization", organization);
+  console.log("isLoaded", isLoaded);
+
+
+  if (typeof window === "undefined" || !isLoaded || !organization ) {
     console.log("info loading");
     return (
       <Info.Skeleton />
     );
   }
+
 
   console.log("info loaded");
 
