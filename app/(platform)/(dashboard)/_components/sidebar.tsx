@@ -19,6 +19,12 @@ interface SidebarProps {
 export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
   const [isMounted, setIsMounted] = useState(false);
 
+  useEffect(() => {
+    console.log("sidebar mounted in client");
+
+    setIsMounted(true);
+  }, []);
+
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(
     storageKey,
     {}
@@ -27,26 +33,23 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
   const { organization: activeOrganization, isLoaded: isLoadedOrg } =
     useOrganization();
 
+    console.log("Sidebar Server Data:", activeOrganization, isLoadedOrg)
+
   const { userMemberships, isLoaded: isLoadedOrgList } = useOrganizationList({
     userMemberships: {
       infinite: true,
     },
   });
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  console.log("Sidebar Server Data:", userMemberships, isLoadedOrgList)
 
   if (!isMounted) {
-    return null; // Render nothing on the server side
+    return null;
   }
 
-  console.log("******** Sidebar *********");
-
-  console.log("activeOrganization", activeOrganization);
-   console.log("isLoadedOrg", isLoadedOrg);
-   console.log("userMemberships", userMemberships);
-   console.log("isLoadedOrgList", isLoadedOrgList);
+  if (typeof window === "undefined" || !isMounted) {
+    return null;
+  }
 
   const defaultAccordionValue: string[] = Object.keys(expanded).reduce(
     (acc: string[], key: string) => {
@@ -66,8 +69,10 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
     }));
   };
 
+  console.log("Is Mounted:", isMounted, "Is Loaded Org:", isLoadedOrg, "Is Loaded Org List:", isLoadedOrgList, "User Memberships:", userMemberships.isLoading)
+
   if (
-    typeof window === "undefined" ||
+    !isMounted ||
     !isLoadedOrg ||
     !isLoadedOrgList
   ) {
@@ -87,6 +92,7 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
     );
   }
 
+  console.log("sidebar loaded");
 
   return (
     <>
