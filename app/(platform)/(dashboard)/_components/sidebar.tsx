@@ -74,8 +74,7 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
   if (
     !isMounted ||
     !isLoadedOrg ||
-    !isLoadedOrgList ||
-    userMemberships.isLoading
+    !isLoadedOrgList
   ) {
     console.log("sidebar loading");
     return (
@@ -117,7 +116,7 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
         className="space-y-2"
         suppressHydrationWarning={true}
       >
-        {userMemberships.data.map(({ organization }) => (
+        {userMemberships.data?.map(({ organization }) => (
           <NavItem
             key={organization.id}
             isActive={activeOrganization?.id === organization.id}
