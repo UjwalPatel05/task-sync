@@ -46,7 +46,7 @@ export const Info = ({
     return null;
   }
 
-  if (!isLoaded || !isMounted) {
+  if (isLoading || !isMounted) {
     console.log("info loading");
     return (
       <Info.Skeleton />
