@@ -17,11 +17,10 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
+  
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    console.log("sidebar mounted in client");
-
     setIsMounted(true);
   }, []);
 
@@ -33,23 +32,23 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
   const { organization: activeOrganization, isLoaded: isLoadedOrg } =
     useOrganization();
 
-    console.log("Sidebar Server Data:", activeOrganization, isLoadedOrg)
-
   const { userMemberships, isLoaded: isLoadedOrgList } = useOrganizationList({
     userMemberships: {
       infinite: true,
     },
   });
 
-  console.log("Sidebar Server Data:", userMemberships, isLoadedOrgList)
-
-  if (!isMounted) {
-    return null;
-  }
 
   if (typeof window === "undefined" || !isMounted) {
     return null;
   }
+
+  console.log("************ SIDEBAR ************");
+  console.log("isMounted:", isMounted);
+  console.log("isLoadedOrg:", isLoadedOrg);
+  console.log("isLoadedOrgList:", isLoadedOrgList);
+  console.log("userMemberships:", userMemberships.data);
+  console.log("UserMemberships Loading:", userMemberships.isLoading);
 
   const defaultAccordionValue: string[] = Object.keys(expanded).reduce(
     (acc: string[], key: string) => {
@@ -68,8 +67,6 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
       [id]: !expanded[id],
     }));
   };
-
-  console.log("Is Mounted:", isMounted, "Is Loaded Org:", isLoadedOrg, "Is Loaded Org List:", isLoadedOrgList, "User Memberships:", userMemberships.isLoading)
 
   if (
     !isMounted ||
@@ -91,8 +88,6 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
       </>
     );
   }
-
-  console.log("sidebar loaded");
 
   return (
     <>

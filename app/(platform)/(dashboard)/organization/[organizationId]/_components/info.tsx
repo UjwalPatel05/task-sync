@@ -19,15 +19,10 @@ export const Info = ({
 
 
   useEffect(() => {
-    console.log("Info mounted in client");
-
     setIsMounted(true);
   }, []);
   
   const { organization, isLoaded } = useOrganization();
-
-
-  console.log("Info Server Data:", organization, isLoaded)
 
   if (!isMounted) {
     return null;
@@ -37,14 +32,16 @@ export const Info = ({
     return null;
   }
 
-  if (!isLoaded || !isMounted) {
-    console.log("info loading");
+  console.log("************ INFO ************");
+  console.log("isMounted:", isMounted);
+  console.log("isLoaded:", isLoaded);
+  console.log("organization:", organization);
+
+  if (!isLoaded) {
     return (
       <Info.Skeleton />
     );
   }
-
-  console.log("info loaded");
 
   return (
     <div className="flex items-center gap-x-4">
