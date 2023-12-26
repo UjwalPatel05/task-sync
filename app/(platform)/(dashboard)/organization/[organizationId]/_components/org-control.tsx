@@ -13,14 +13,15 @@ export const OrgControl = () => {
       try {
         console.log("Calling setActive");
         if (!setActive) return;
-      await setActive({
-        organization: params.organizationId as string,
-      });
-      console.log("setActive completed");
+        await setActive({
+          organization: params.organizationId as string,
+        });
+        console.log("setActive completed");
       } catch (error) {
         console.error("Error setting organization:", error);
       }
     };
+
     setOrganization();
   }, [setActive, params.organizationId]);
 

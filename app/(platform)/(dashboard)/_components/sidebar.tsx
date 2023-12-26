@@ -17,7 +17,7 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
-  
+
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {

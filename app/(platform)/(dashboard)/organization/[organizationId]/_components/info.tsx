@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { CreditCard } from "lucide-react";
-import { useOrganization } from "@clerk/nextjs";
+import { useAuth, useOrganization } from "@clerk/nextjs";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { useEffect, useState } from "react";
@@ -16,8 +16,9 @@ export const Info = ({
 }: InfoProps) => {
 
   const [isMounted, setIsMounted] = useState(false);
-
-
+  const {userId} = useAuth();
+  console.log("userId:", userId);
+  
   useEffect(() => {
     setIsMounted(true);
   }, []);
