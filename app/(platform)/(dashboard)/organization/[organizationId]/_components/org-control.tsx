@@ -9,20 +9,10 @@ export const OrgControl = () => {
   const params = useParams();
 
   useEffect(() => {
-    const setOrganization = async () => {
-      try {
-        console.log("Calling setActive");
-        if (!setActive) return;
-        await setActive({
-          organization: params.organizationId as string,
-        });
-        console.log("setActive completed");
-      } catch (error) {
-        console.error("Error setting organization:", error);
-      }
-    };
-
-    setOrganization();
+    if (!setActive) return;
+    setActive({
+      organization: params.organizationId as string,
+    });
   }, [setActive, params.organizationId]);
 
   return null;

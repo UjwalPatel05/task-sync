@@ -11,7 +11,7 @@ const BillingPage = async() => {
 
     return (
         <div className="w-full">
-            <Info isPro={isPro}/>
+            <Info/>
             <Separator className="my-2"/>
             <SubscriptionButton isPro={isPro}/>
         </div>

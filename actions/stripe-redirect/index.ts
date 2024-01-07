@@ -22,8 +22,6 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   }
 
   const settingsUrl = absoluteUrl(`/organization/${orgId}`);
-
-  console.log("settingsUrl", settingsUrl);
   
   let url = "";
 

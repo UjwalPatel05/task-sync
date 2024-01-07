@@ -43,13 +43,6 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
     return null;
   }
 
-  console.log("************ SIDEBAR ************");
-  console.log("isMounted:", isMounted);
-  console.log("isLoadedOrg:", isLoadedOrg);
-  console.log("isLoadedOrgList:", isLoadedOrgList);
-  console.log("userMemberships:", userMemberships.data);
-  console.log("UserMemberships Loading:", userMemberships.isLoading);
-
   const defaultAccordionValue: string[] = Object.keys(expanded).reduce(
     (acc: string[], key: string) => {
       if (expanded[key]) {
@@ -73,7 +66,6 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
     !isLoadedOrg ||
     !isLoadedOrgList
   ) {
-    console.log("sidebar loading");
     return (
       <>
         <div className="flex items-center justify-between mb-2">
