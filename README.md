@@ -19,32 +19,6 @@ TaskSync is a Fullstack Full Stack Application built with Next.js 14, featuring 
 - shadcnUI & TailwindCSS for responsive application
 
 
-## Environment Variables
-
-To run this project, you will need to add the following environment variables to your .env file
-
-`NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
-
-`CLERK_SECRET_KEY`
-
-`NEXT_PUBLIC_CLERK_SIGN_IN_URL`
-
-`NEXT_PUBLIC_CLERK_SIGN_UP_URL`
-
-`NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL`
-
-`NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL`
-
-`NEXT_PUBLIC_UNSPLASH_ACCESS_KEY`
-
-`DATABASE_URL`
-
-`STRIPE_API_KEY`
-
-`NEXT_PUBLIC_APP_URL`
-
-`STRIPE_WEBHOOK_SECRET`
-
 ## Run Locally
 
 Clone the project
@@ -100,9 +74,12 @@ Start the server
 
 ![Dashboard](https://res.cloudinary.com/djstjnl11/image/upload/v1704825843/j4yrzvfcjafax7b7tdjf.png)
 
+
 ![Task List](https://res.cloudinary.com/djstjnl11/image/upload/v1704825843/fd28vlrqjynptc2scjs3.png)
 
+
 ![Card Description](https://res.cloudinary.com/djstjnl11/image/upload/v1704825843/uvpotu3mn08e7st3r8nv.png)
+
 
 ![Payment Gateway](https://res.cloudinary.com/djstjnl11/image/upload/v1704826163/xl9iwqhcyot8vfc6pzrk.png)
 
